@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Portfolio</title>
+  <style>
+    /* General Reset & Smooth Scroll */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9f9f9;
+      scroll-behavior: smooth;
+    }
+
+    /* Header Animation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      background-color: #fff;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transform: translateY(-100%);
+      opacity: 0;
+      animation: slideDown 1s forwards;
+    }
+
+    @keyframes slideDown {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    header h2 {
+      color: #4a90e2;
+      font-size: 1.6rem;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    nav ul li {
+      color: #333;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      font-size: 1rem;
+    }
+
+    nav ul li:hover {
+      color: #4a90e2;
+      transform: scale(1.05);
+    }
+
+    /* Mobile Menu Toggle (Hidden by default on large screens) */
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #333;
+    }
+
+    /* Main Container */
+    .container {
+      display: flex;
+      flex-direction: column;
+      padding: 100px 5% 50px;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards 0.5s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    main {
+      text-align: center;
+      margin-bottom: 2rem;
+      animation-delay: 0.7s;
+    }
+
+    main h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+
+    main p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    aside {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    aside img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: contain;
+      border: 5px solid #4a90e2;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.5s ease;
+      animation: floatIn 1s forwards 0.9s;
+    }
+
+    @keyframes floatIn {
+      0% {
+        transform: scale(0.8) rotate(-10deg);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+      }
+    }
+
+    aside img:hover {
+      transform: scale(1.05) rotate(5deg);
+    }
+
+    /* Skills Section */
+    section {
+      padding: 80px 5%;
+      text-align: center;
+      background: #f0f5ff;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 1.2s;
+    }
+
+    section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.8rem;
+      color: #2c3e50;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.3rem;
+      width: 100%;
+      max-width: 280px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      animation: popIn 0.6s forwards;
+    }
+
+    .card:nth-child(1) { animation-delay: 1.5s; }
+    .card:nth-child(2) { animation-delay: 1.7s; }
+    .card:nth-child(3) { animation-delay: 1.9s; }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(74, 144, 226, 0.2);
+    }
+
+    .card h4 {
+      font-size: 1.3rem;
+      color: #4a90e2;
+      margin-bottom: 0.8rem;
+    }
+
+    .card p {
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 60px 5%;
+      max-width: 600px;
+      margin: 40px auto;
+      text-align: center;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 2.2s;
+    }
+
+    .contact h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.3rem;
+      color: #2c3e50;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    input, textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #4a90e2;
+      outline: none;
+      box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+    }
+
+    input[type="submit"] {
+      background-color: #4a90e2;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      padding: 12px;
+      font-size: 1.1rem;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #3a7bc8;
+      transform: scale(1.03);
+    }
+
+    /* Footer or extra spacing */
+    body::after {
+      content: '';
+      display: block;
+      height: 100px;
+    }
+
+    /* ========================================
+       MEDIA QUERIES FOR RESPONSIVENESS
+       ======================================== */
+
+    /* Tablet and Below (max-width: 768px) */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem 5%;
+      }
+
+      header h2 {
+        font-size: 1.4rem;
+      }
+
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 1rem 5%;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        gap: 1rem;
+        z-index: 999;
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .container {
+        padding-top: 120px;
+        text-align: center;
+      }
+
+      main h3, section h2, .contact h3 {
+        font-size: 1.6rem;
+      }
+
+      aside img {
+        width: 140px;
+        height: 140px;
+      }
+
+      .card h4 {
+        font-size: 1.2rem;
+      }
+
+      .card p {
+        font-size: 0.9rem;
+      }
+
+      .contact h3 {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* Mobile Landscape / Small Tablets (max-width: 600px) */
+    @media (max-width: 600px) {
+      header h2 {
+        font-size: 1.3rem;
+      }
+
+      main h3 {
+        font-size: 1.5rem;
+      }
+
+      section h2 {
+        font-size: 1.8rem;
+      }
+
+      .card {
+        padding: 1rem;
+      }
+
+      .card h4 {
+        font-size: 1.1rem;
+      }
+
+      input, textarea, input[type="submit"] {
+        font-size: 0.95rem;
+        padding: 10px;
+      }
+
+      .contact h3 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Small Phones (max-width: 480px) */
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem 5%;
+      }
+
+      header h2 {
+        font-size: 1.2rem;
+      }
+
+      .menu-toggle {
+        font-size: 1.3rem;
+      }
+
+      main h3 {
+        font-size: 1.4rem;
+      }
+
+      section h2 {
+        font-size: 1.6rem;
+      }
+
+      aside img {
+        width: 120px;
+        height: 120px;
+      }
+
+      .card {
+        max-width: 100%;
+        padding: 1rem;
+      }
+
+      .card h4 {
+        font-size: 1.1rem;
+      }
+
+      .card p {
+        font-size: 0.9rem;
+      }
+
+      .contact h3 {
+        font-size: 1.4rem;
+      }
+
+      form {
+        gap: 0.6rem;
+      }
+
+      input[type="submit"] {
+        font-size: 1rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Momen Mohammed</h2>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav>
+      <ul id="nav-menu">
+        <li>home</li>
+        <li>about</li>
+        <li>skills</li>
+        <li>contact</li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <main>
+      <h3>about</h3>
+      <p>I am a full-stack Web developer looking for website projects.</p>
+    </main>
+    <aside>
+      <img src="Momen.png" alt="momen" />
+    </aside>
+  </div>
+
+  <section>
+    <h2>skills</h2>
+    <div class="cards">
+      <div class="card">
+        <h4>Frontend</h4>
+        <p>HTML, CSS, JavaScript, Vue3</p>
+      </div>
+      <div class="card">
+        <h4>Backend</h4>
+        <p>PHP, Laravel</p>
+      </div>
+      <div class="card">
+        <h4>Database</h4>
+        <p>MongoDB, Mysql</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="contact">
+    <h3>contact Me</h3>
+   <form action="mailto:momenshreef72@gmail.com" method="post" enctype="text/plain">
+  <label for="email">email:</label>
+  <input type="email" name="email" id="email" required />
+  <textarea name="message" id="message" cols="30" rows="5" placeholder="enter a message..." required></textarea>
+  <input type="submit" name="submit" value="send" />
+</form>
+  </div>
+<!-- Footer Section -->
+<footer style="
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 40px 5%;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 40px;
+  opacity: 0;
+  animation: fadeInUp 1s forwards 2.5s;
+">
+  <div style="margin-bottom: 20px;">
+    <p>&copy; <span id="year">2025</span> My Portfolio. All rights reserved.</p>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 1.5rem; font-size: 1.3rem;">
+    <a href="https://github.com/yourusername" target="_blank" style="color: #ecf0f1; transition: color 0.3s ease;">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="https://linkedin.com/in/yourprofile" target="_blank" style="color: #ecf0f1; transition: color 0.3s ease;">
+      <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="https://twitter.com/yourhandle" target="_blank" style="color: #ecf0f1; transition: color 0.3s ease;">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="https://instagram.com/yourprofile" target="_blank" style="color: #ecf0f1; transition: color 0.3s ease;">
+      <i class="fab fa-instagram"></i>
+    </a>
+  </div>
+</footer>
+
+  <script>
+    // Toggle mobile menu
+    function toggleMenu() {
+      const navMenu = document.getElementById('nav-menu');
+      navMenu.classList.toggle('show');
+    }
+
+    // Optional: Close mobile menu when clicking a nav item
+    document.querySelectorAll('nav ul li').forEach(item => {
+      item.addEventListener('click', () => {
+        document.getElementById('nav-menu').classList.remove('show');
+      });
+    });
+   
+     // Set current year in copyright
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Optional: Close mobile menu when clicking a nav item (already in your code, kept as-is)
+  document.querySelectorAll('nav ul li').forEach(item => {
+    item.addEventListener('click', () => {
+      document.getElementById('nav-menu').classList.remove('show');
+    });
+  });
+  </script>
+</body>
+</html>
+
