@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit Portfolio Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #0b0f2a, #000814);
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Stars Animation */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            from {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-100vw, 100vh);
+                opacity: 1;
+            }
+        }
+
+        /* NAVBAR */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 22px;
+            color: #ffd60a;
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #ffd60a;
+        }
+
+        /* SOLAR SYSTEM */
+        .solar-system {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sun {
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: #ffb703;
+            border-radius: 50%;
+            box-shadow: 0 0 80px #ffb703;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ORBITS */
+        .orbit {
+            position: absolute;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rotate linear infinite;
+        }
+
+        .orbit1 {
+            width: 350px;
+            height: 350px;
+            animation-duration: 18s;
+        }
+
+        .orbit2 {
+            width: 500px;
+            height: 500px;
+            animation-duration: 28s;
+        }
+
+        .orbit3 {
+            width: 650px;
+            height: 650px;
+            animation-duration: 38s;
+        }
+
+        .orbit4 {
+            width: 800px;
+            height: 800px;
+            animation-duration: 48s;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* PLANETS */
+        .planet {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all .8s ease;
+            opacity: .7;
+        }
+
+        /* Colors */
+        #home {
+            background: #219ebc;
+        }
+
+        #about {
+            background: #8ecae6;
+        }
+
+        #services {
+            background: #ff006e;
+        }
+
+        #contact {
+            background: #8338ec;
+        }
+
+        .active {
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) scale(2);
+            opacity: 1 !important;
+            z-index: 20;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+        }
+
+        /* CONTENT */
+        .content {
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            text-align: center;
+            padding: 0 20px;
+            transition: .5s;
+            z-index: 10;
+        }
+
+        .content h2 {
+            font-size: 32px;
+            color: #ffd60a;
+            margin-bottom: 15px;
+        }
+
+        .content p {
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+            opacity: .85;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+                font-size: 18px;
+            }
+            
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav a {
+                margin: 5px 10px;
+                font-size: 14px;
+            }
+            
+            .orbit1 {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .orbit2 {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .orbit3 {
+                width: 360px;
+                height: 360px;
+            }
+            
+            .orbit4 {
+                width: 440px;
+                height: 440px;
+            }
+            
+            .planet {
+                width: 40px;
+                height: 40px;
+                font-size: 10px;
+            }
+            
+            .sun {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .sun img {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .content h2 {
+                font-size: 24px;
+            }
+            
+            .content p {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .orbit1 {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .orbit2 {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .orbit3 {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .orbit4 {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .planet {
+                width: 30px;
+                height: 30px;
+                font-size: 8px;
+            }
+            
+            .sun {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .sun img {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .content {
+                bottom: 20px;
+            }
+            
+            .content h2 {
+                font-size: 20px;
+            }
+            
+            .content p {
+                font-size: 12px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .orbit1 {
+                width: 400px;
+                height: 400px;
+            }
+            
+            .orbit2 {
+                width: 550px;
+                height: 550px;
+            }
+            
+            .orbit3 {
+                width: 700px;
+                height: 700px;
+            }
+            
+            .orbit4 {
+                width: 850px;
+                height: 850px;
+            }
+            
+            .planet {
+                width: 80px;
+                height: 80px;
+                font-size: 14px;
+            }
+            
+            .sun {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .sun img {
+                width: 140px;
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
+    
+    <header>
+        <div class="logo">
+            Momen Mohammed Shreef
+        </div>
+        <nav>
+            <a onclick="activatePlanet('home')">Home</a>
+            <a onclick="activatePlanet('about')">About</a>
+            <a onclick="activatePlanet('services')">Services</a>
+            <a onclick="activatePlanet('contact')">Contact</a>
+        </nav>
+    </header>
+    
+    <div class="solar-system">
+        <div class="sun">
+            <img src="momen.png" alt="matrix" width="120px" height="120px">
+        </div>
+        <div class="orbit orbit1">
+            <div class="planet" id="home" onclick="activatePlanet('home')">Home</div>
+        </div>
+        <div class="orbit orbit2">
+            <div class="planet" id="about" onclick="activatePlanet('about')">About</div>
+        </div>
+        <div class="orbit orbit3">
+            <div class="planet" id="services" onclick="activatePlanet('services')">Services</div>
+        </div>
+        <div class="orbit orbit4">
+            <div class="planet" id="contact" onclick="activatePlanet('contact')">Contact</div>
+        </div>
+        <div class="content" id="content">
+            <h2>Welcome</h2>
+            <p>Click on a planet to bring it to the center and explore its content.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Create falling stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Random properties
+                const size = Math.random() * 3;
+                const duration = Math.random() * 5 + 3;
+                const delay = Math.random() * 5;
+                const startX = Math.random() * 100;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${startX}vw`;
+                star.style.top = `-10px`;
+                star.style.animationDuration = `${duration}s`;
+                star.style.animationDelay = `${delay}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Content data
+        const contentData = {
+            home: {
+                title: "Welcome to My Portfolio",
+                text: "I make websites for businesses and individuals so they can grow their work without losing clients"
+            },
+            about: {
+                title: "About My Work",
+                text: "The website made by frontend and backend techniques"
+            },
+            services: {
+                title: "My Services",
+                text: "Web Development, UI/UX, Branding, Animation, Marketing and more."
+            },
+            contact: {
+                title: "Contact Me",
+                text: "Ready to launch Your Website? Let's build something out of this world together. <a href='https://wa.me/0129451947' style='background:yellowgreen;color:white;text-decoration:none;padding:10px;border-radius:30px;box-shadow:1px 3px 10px yellow;'>Whatsapp</a>"
+            }
+        };
+
+        function activatePlanet(id) {
+            // Reset planets
+            document.querySelectorAll(".planet").forEach(p => {
+                p.classList.remove("active");
+                p.style.opacity = ".3";
+            });
+            
+            // Stop all orbit animations
+            document.querySelectorAll(".orbit").forEach(o => {
+                o.style.animationPlayState = "running";
+            });
+            
+            // Activate selected
+            let planet = document.getElementById(id);
+            planet.classList.add("active");
+            planet.style.opacity = "1";
+            
+            // Pause its orbit
+            planet.parentElement.style.animationPlayState = "paused";
+            
+            // Update content
+            document.getElementById("content").innerHTML = `
+                <h2>${contentData[id].title}</h2>
+                <p>${contentData[id].text}</p>
+            `;
+        }
+
+        // Initialize stars when page loads
+        window.addEventListener('load', () => {
+            createStars();
+        });
+    </script>
+</body>
+</html>
